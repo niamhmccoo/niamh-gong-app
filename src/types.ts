@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export interface User {
     email: string;
     firstName: string;
@@ -13,4 +15,15 @@ export interface HierarchyNode extends User {
     initials: string;
     isManager: boolean;
     isExpanded: boolean;
+}
+
+export interface AuthContextType {
+    user: User | null;
+    isAuthenticated: boolean;
+    login: (user: User) => void;
+    logout: () => void;
+}
+
+export interface PrivateRouteProps {
+    children: ReactNode;
 }
