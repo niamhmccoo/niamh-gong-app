@@ -38,11 +38,21 @@ export const loginUser = async (email: string, password: string): Promise<User |
         }
 
         const data = await response.json();
-        
-        // 3. Find user with matching email and encoded password
-        const loggedInUser = Object.values(data.users).find((user: any) => data.secrets[user.id] === secret);
 
-        return loggedInUser as User || null
+        if (data.users.length === 0) {
+            console.warn('loginUser: no users found in database');
+        }
+
+        // 3. Find user by matching secret
+        const matchedId = data?.secrets?.[secret];
+        if (matchedId !== undefined && matchedId !== null) {
+            const loggedInUser = data.users.find((u: User) => u.id === matchedId);
+            if (loggedInUser) {
+                return loggedInUser as User;
+            }
+        }
+        
+        return null;
 
     } catch (error) {
         console.error('Error logging in user:', error);
