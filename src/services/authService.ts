@@ -1,3 +1,4 @@
+import { DATABASE_URL } from '../constants';
 import type { User } from '../types';
 
 const POISON_ARRAY = [156, 33, 64, 137, 105, 107, 7, 7, 126, 68, 14, 219, 130, 224, 73, 226, 127, 240, 166, 172, 223, 76, 217, 16, 219, 114, 221, 237, 198, 119, 112, 172];
@@ -24,8 +25,6 @@ function encode(email: string, password: string): string {
     return encodedResult;
 }
 
-const DATABASE_URL = 'https://gongfetest.firebaseio.com/.json';
-
 export const loginUser = async (email: string, password: string): Promise<User | null> => {
     // 1. Encode the password
     const secret = encode(email, password);
@@ -44,7 +43,7 @@ export const loginUser = async (email: string, password: string): Promise<User |
         const loggedInUser = Object.values(data.users).find((user: any) => data.secrets[user.id] === secret);
 
         return loggedInUser as User || null
-        
+
     } catch (error) {
         console.error('Error logging in user:', error);
         throw error;

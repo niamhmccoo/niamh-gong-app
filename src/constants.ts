@@ -1,0 +1,1 @@
+export const DATABASE_URL = 'https://gongfetest.firebaseio.com/.json';
