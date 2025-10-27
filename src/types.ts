@@ -27,3 +27,10 @@ export interface AuthContextType {
 export interface PrivateRouteProps {
     children: ReactNode;
 }
+
+export interface HierarchyNodeProps {
+    node: HierarchyNode;
+}
+export interface HierarchyTreeProps {
+    nodes: HierarchyNode[];
+}
