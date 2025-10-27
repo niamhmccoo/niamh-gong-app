@@ -34,17 +34,23 @@ const LoginPage: FC = () => {
     };
 
     return (
-        <>
-            <h2>Please log in</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email address:</label>
-                <input type="email" id="email" name="email" autoComplete='off' onChange={(e) => setEmail(e.target.value)} required />
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" autoComplete='off' onChange={(e) => setPassword(e.target.value)} required />
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit" disabled={loading}>{loading ? 'Logging in...' : 'Log In'}</button>
-            </form>
-        </>
+        <div className="login-page-wrapper">
+            <div className="login-page-container">
+                <h2>Please log in</h2>
+                <form onSubmit={handleSubmit} className="login-form">
+                    <div className='form-section'>
+                        <label htmlFor="email">email address:</label>
+                        <input type="email" id="email" name="email" autoComplete='off' onChange={(e) => setEmail(e.target.value)} required />
+                    </div>
+                    <div className='form-section'>
+                        <label htmlFor="password">Password:</label>
+                        <input type="password" id="password" name="password" autoComplete='off' onChange={(e) => setPassword(e.target.value)} required />
+                    </div>
+                    {error && <p className="error-message">{error}</p>}
+                    <button type="submit" disabled={loading}>{loading ? 'Logging in...' : 'Log In'}</button>
+                </form>
+            </div>
+        </div>
     )
 };
 
