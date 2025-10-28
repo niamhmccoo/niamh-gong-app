@@ -5,7 +5,7 @@ import { fetchAllUsers } from '../services/userService';
 import { buildHerarchyTree } from '../utils/hierarchyUtils';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-
+import './HierarchyPage.css';
 
 const HierarchyPage: FC = () => {
     const [hierarchyData, setHierarchyData] = useState<HierarchyNode[]>([]);
@@ -50,9 +50,9 @@ const HierarchyPage: FC = () => {
 
     return (
         <div>
-            <header>
-            <h1>Hierarchy Tree</h1>
-            <div>{user?.firstName} {user?.lastName} <a href="#" onClick={handleLogout}>(logout)</a></div>
+            <header className='hierarchy-page-header'>
+            <h1 className="title">Hierarchy Tree</h1>
+            <div className="user-info">{user?.firstName} {user?.lastName}{' '}<a className="logout-link" href="#" onClick={handleLogout}>(logout)</a></div>
             </header>
             <main>
                 {hierarchyData.length > 0 ? (

@@ -1,7 +1,7 @@
 import { useState, type FC } from 'react';
 import type { HierarchyNodeProps } from '../types';
 import { getInitials } from '../utils/hierarchyUtils';
-
+import './HierarchyTreeNode.css'; 
 
 const HierarchyTreeNode: FC<HierarchyNodeProps> = ({ node }) => {
     const [isExpanded, setIsExpanded] = useState(node.isExpanded);
@@ -17,19 +17,19 @@ const HierarchyTreeNode: FC<HierarchyNodeProps> = ({ node }) => {
     }
 
     return (
-        <div>
-            <div>
-                <button onClick={node.isManager ? toggleExpand : undefined}>
-                    {node.isManager ? '+' : '-'}
+        <div className="tree-node">
+            <div className="node-row">
+                <button className="toggle-button" onClick={node.isManager ? toggleExpand : undefined} disabled={!node.isManager}>
+                    {node.isManager ? (isExpanded ? '-' : '+') : '-'}
                 </button>
                 {node.photo ? (
-                    <img src={node.photo} alt={`${node.firstName} ${node.lastName}`} />
+                    <img className="avatar avatar-image" src={node.photo} alt={`${node.firstName} ${node.lastName}`} />
                 ) : (
-                    <div>{initials}</div>
+                    <div className="avatar">{initials}</div>
                 )}
-                <span>{node.firstName} {node.lastName} {node.email} </span>
+                <span className="user-info-text">{node.firstName} {node.lastName} {node.email} </span>
             </div>
-            <div>
+            <div className="children-container">
                 {isExpanded && node.children.length > 0 && node.children.map((child) => (
                     <HierarchyTreeNode key={child.id} node={child} />
                 ))}

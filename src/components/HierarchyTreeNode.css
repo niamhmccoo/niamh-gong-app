@@ -1,0 +1,45 @@
+.hierarchy-container {
+  text-align: left;
+}
+
+.node-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  width: 30px;
+  margin-right: 1rem;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #8e44ad;
+  margin-right: 1.25rem;
+  flex-shrink: 0;
+  
+  /* Center initials */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.avatar-image {
+  object-fit: cover;
+}
+
+.user-info-text {
+  font-size: 1.2rem;
+}
+
+.children-container {
+  padding-left: 4rem;
+}

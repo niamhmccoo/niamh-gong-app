@@ -2,6 +2,7 @@ import { useState, type FC, type FormEvent } from 'react';
 import { loginUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import './LoginPage.css';
 
 const LoginPage: FC = () => {
     const navigate = useNavigate();
@@ -35,10 +36,10 @@ const LoginPage: FC = () => {
 
     return (
         <div className="login-page-wrapper">
-            <div className="login-page-container">
-                <h2>Please log in</h2>
+            <h2 className="login-title">Please log in</h2> 
+            <div className="login-form-container">
                 <form onSubmit={handleSubmit} className="login-form">
-                    <div className='form-section'>
+                    <div className='form-row'>
                         <label htmlFor="email">email address:</label>
                         <input 
                             type="email" 
@@ -50,7 +51,7 @@ const LoginPage: FC = () => {
                             required 
                         />
                     </div>
-                    <div className='form-section'>
+                    <div className='form-row'>
                         <label htmlFor="password">Password:</label>
                         <input 
                             type="password" 
@@ -63,7 +64,7 @@ const LoginPage: FC = () => {
                         />
                     </div>
                     {error && <p className="error-message">{error}</p>}
-                    <button type="submit" disabled={loading}>{loading ? 'Logging in...' : 'Log In'}</button>
+                    <button className="login-button" type="submit" disabled={loading}>{loading ? 'Logging in...' : 'Log In'}</button>
                 </form>
             </div>
         </div>
