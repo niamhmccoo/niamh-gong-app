@@ -29,8 +29,10 @@ const HierarchyPage: FC = () => {
             finally {
                 setLoading(false);
             }
-            loadHierarchyData(); // name & call immediately so useEffect doesn't incorrectly return a promise
-        }
+        };
+
+        // name & call immediately
+        loadHierarchyData();
     }, []);
 
     const handleLogout = () => {

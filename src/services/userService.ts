@@ -3,7 +3,7 @@ import { DATABASE_URL } from '../constants';
 
 export const fetchAllUsers = async (): Promise<User[]> => {
     try {
-        const response = await fetch(`${DATABASE_URL}/users`);
+        const response = await fetch(`${DATABASE_URL}/users.json`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
