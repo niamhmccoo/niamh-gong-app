@@ -40,11 +40,27 @@ const LoginPage: FC = () => {
                 <form onSubmit={handleSubmit} className="login-form">
                     <div className='form-section'>
                         <label htmlFor="email">email address:</label>
-                        <input type="email" id="email" name="email" autoComplete='off' onChange={(e) => setEmail(e.target.value)} required />
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            value={email}
+                            autoComplete='off' 
+                            onChange={(e) => setEmail(e.target.value.trim())} 
+                            required 
+                        />
                     </div>
                     <div className='form-section'>
                         <label htmlFor="password">Password:</label>
-                        <input type="password" id="password" name="password" autoComplete='off' onChange={(e) => setPassword(e.target.value)} required />
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            value={password}
+                            autoComplete='off' 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                        />
                     </div>
                     {error && <p className="error-message">{error}</p>}
                     <button type="submit" disabled={loading}>{loading ? 'Logging in...' : 'Log In'}</button>

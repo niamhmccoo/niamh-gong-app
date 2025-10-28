@@ -18,8 +18,8 @@ export const buildHerarchyTree = (users: User[]): HierarchyNode[] => {
             ...user,
             children: [],
             initials: getInitials(user.firstName, user.lastName),
-            isManager: false, // TODO: update later
-            isExpanded: false, // TODO: update later
+            isManager: false,
+            isExpanded: false,
         };
 
         if (user.managerId) {
