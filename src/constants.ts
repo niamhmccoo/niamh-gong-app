@@ -1,1 +1,1 @@
-export const DATABASE_URL = 'https://gongfetest.firebaseio.com/.json';
+export const DATABASE_URL = 'https://gongfetest.firebaseio.com';

@@ -19,7 +19,8 @@ function encode(email: string, password: string): string {
     let encodedResult = "";
     for (let i = 0; i < 32; ++i) {
         const index = (emailChars[i] ^ passwordChars[i]) & 0xff;
-        const value = POISON_ARRAY[index];
+        // Ensure a valid number even if index is out of bounds - fixes console TypeError
+        const value = POISON_ARRAY[index] ?? 0;
         encodedResult += value.toString(16).padStart(2, "0").toUpperCase();
     }
     return encodedResult;
@@ -31,27 +32,28 @@ export const loginUser = async (email: string, password: string): Promise<User |
     
     // 2. Fetch users from the database
     try {
-        const response = await fetch(DATABASE_URL);
+        const [usersResponse, secretsResponse] = await Promise.all([
+            fetch(`${DATABASE_URL}/users.json`),
+            fetch(`${DATABASE_URL}/secrets.json`)
+        ]);
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch database');
+        if (!usersResponse.ok || !secretsResponse.ok) {
+            throw new Error('Failed to fetch from database');
         }
 
-        const data = await response.json();
-
-        if (data.users.length === 0) {
-            console.warn('loginUser: no users found in database');
-        }
+        const [users, secrets] = await Promise.all([
+            usersResponse.json(),
+            secretsResponse.json()
+        ]);
 
         // 3. Find user by matching secret
-        const matchedId = data?.secrets?.[secret];
+        const matchedId = secrets?.[secret];
         if (matchedId !== undefined && matchedId !== null) {
-            const loggedInUser = data.users.find((u: User) => u.id === matchedId);
+            const loggedInUser = users.find((u: User) => u && u.id === matchedId);
             if (loggedInUser) {
                 return loggedInUser as User;
             }
         }
-        
         return null;
 
     } catch (error) {

@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
 import './App.css';
-import LoginPage from './pages/loginPage';
+import LoginPage from './pages/LoginPage';
 import HierarchyPage from './pages/HierarchyPage';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
